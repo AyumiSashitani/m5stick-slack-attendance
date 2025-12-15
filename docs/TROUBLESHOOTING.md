@@ -1,8 +1,17 @@
 # トラブルシューティング
 
+## Wi-Fiに繋がらない
+
+* **ESP32は2.4GHzのみ対応**（5GHz Wi-Fiは接続不可）
+* SSID / パスワードが正しいか確認
+* ルーターが2.4GHzと5GHzで別のSSIDになっているか確認
+
+---
+
 ## Slackに届かない
 
 * Webhook URLが正しいか確認
+* Webhook URLの前後に空白や改行が入っていないか
 * Wi-Fiに繋がっているか（Serial Monitorでログ確認）
 * Webhook作成時の投稿先チャンネルが正しいか
 
