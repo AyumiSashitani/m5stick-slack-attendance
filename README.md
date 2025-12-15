@@ -1,5 +1,10 @@
 # M5Stick Slack 出退勤ボタン（Attendance Button）
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Platform: ESP32](https://img.shields.io/badge/Platform-ESP32-blue.svg)](https://www.espressif.com/en/products/socs/esp32)
+[![Arduino](https://img.shields.io/badge/Arduino-IDE-00979D.svg)](https://www.arduino.cc/)
+[![Slack](https://img.shields.io/badge/Slack-Webhook-4A154B.svg)](https://api.slack.com/messaging/webhooks)
+
 M5Stick（ESP32）で **ボタンを押すだけでSlackに出勤/退勤を投稿**するミニプロジェクト。
 
 * **Aボタン**：出勤メッセージ
