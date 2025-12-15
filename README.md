@@ -75,8 +75,65 @@ cp attendance_button/config.example.h attendance_button/config.h
 
 ---
 
+## 開発環境セットアップ
+
+### Arduino IDE
+
+1. [Arduino IDE 2.x](https://www.arduino.cc/en/software) をインストール
+2. **Settings（Preferences）** → **Additional boards manager URLs** に以下を追加：
+
+   ```
+   https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
+   ```
+
+3. **Boards Manager** で `esp32` を検索してインストール
+
+---
+
 ## ビルド・書き込み
 
-### Arduino IDE での手順（最小）
+### Arduino IDE での手順
 
-1. Arduino IDE
+1. `attendance_button/attendance_button.ino` を開く
+2. M5StickをUSBで接続
+3. **Tools** メニューで設定：
+   * **Board**：`ESP32 Dev Module`（または M5StickC / M5StickC Plus があれば選択）
+   * **Port**：接続したシリアルポートを選択
+4. **Upload**（→ボタン）で書き込み
+5. 成功すると、Slackに `:electric_plug: M5Stick 起動したで` が届く
+
+---
+
+## トラブルシューティング
+
+### Slackに届かない
+
+* Webhook URLが正しいか確認
+* Wi-Fiに繋がっているか（Serial Monitorでログ確認）
+* Webhook作成時の投稿先チャンネルが正しいか
+
+### ボタンが反応しない
+
+M5Stickの機種によってピン番号が異なる場合がある。
+
+| 機種 | BTN_A | BTN_B |
+|------|-------|-------|
+| M5StickC | 37 | 39 |
+| M5StickC Plus | 37 | 39 |
+
+反応しない場合は `config.h` でピンを上書き：
+
+```cpp
+#define BTN_A 37
+#define BTN_B 39
+```
+
+### Serial Monitor でデバッグ
+
+Arduino IDE → **Tools** → **Serial Monitor**（115200 baud）で送信ログを確認できる。
+
+---
+
+## License
+
+MIT
