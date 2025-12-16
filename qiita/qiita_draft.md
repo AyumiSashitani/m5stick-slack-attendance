@@ -236,6 +236,8 @@ Failed uploading: uploading error: exit status 2
 
 ### M5Stickの画面
 
+<img src="qiita_m5stick_screen.gif" width="300" alt="M5Stick画面デモ">
+
 | 状態 | 表示 |
 |------|------|
 | 待機中 | `Ready!` + ボタン説明 |
