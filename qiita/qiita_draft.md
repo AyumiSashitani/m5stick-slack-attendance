@@ -133,14 +133,52 @@ Arduino IDEを開いたら、M5Stick（ESP32）を認識させるための設定
 
 ---
 
-### 4. コードを準備
+### 4. コードのポイント
 
-GitHubからコードを取得します。
+完成コードはGitHubで公開していますが、ポイントを解説します。
 
-```bash
-git clone https://github.com/AyumiSashitani/m5stick-slack-attendance.git
-cd m5stick-slack-attendance
+#### Slackへの送信
+
+Webhook URLにJSON形式でPOSTするだけ。これだけでSlackに投稿できます。
+
+```cpp
+HTTPClient http;
+http.begin(SLACK_WEBHOOK_URL);
+http.addHeader("Content-Type", "application/json");
+
+String payload = "{\"text\":\"出勤しました\"}";
+int code = http.POST(payload);
 ```
+
+#### ボタン検知
+
+M5StickCPlus2ライブラリのおかげで、ボタン検知も簡単です。
+
+```cpp
+M5.update();  // ボタン状態を更新
+
+if (M5.BtnA.wasPressed()) {
+  // Aボタンが押された → 出勤処理
+}
+if (M5.BtnB.wasPressed()) {
+  // Bボタンが押された → 退勤処理
+}
+```
+
+#### NTPで時刻取得
+
+インターネット経由で正確な時刻を取得。日本時間（UTC+9）に設定しています。
+
+```cpp
+configTime(9 * 3600, 0, "ntp.nict.jp");  // JST設定
+
+struct tm timeinfo;
+getLocalTime(&timeinfo);  // 現在時刻を取得
+```
+
+👉 **完成コード**: [GitHub - m5stick-slack-attendance](https://github.com/AyumiSashitani/m5stick-slack-attendance)
+
+---
 
 #### config.h を作成
 
